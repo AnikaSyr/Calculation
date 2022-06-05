@@ -17,9 +17,9 @@ public class Department {
     private String name;
 
     @OneToMany(mappedBy = "department")
-    private Set<Product> products;
+    private List<Product> products;
 
-    public Department(String name, Set<Product> products) {
+    public Department(String name, List<Product> products) {
         this.name = name;
         this.products = products;
     }
@@ -44,11 +44,11 @@ public class Department {
         this.name = name;
     }
 
-    public Set<Product> getProducts() {
+    public List<Product> getProducts() {
         return products;
     }
 
-    public void setProducts(Set<Product> products) {
+    public void setProducts(List<Product> products) {
         this.products = products;
     }
 }

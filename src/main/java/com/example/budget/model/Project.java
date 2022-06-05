@@ -18,32 +18,35 @@ public class Project {
 
     @OneToMany
     @JoinColumn(name="id_project")
-    List<ProductCopy> productCopies = new ArrayList<>();
+    List<ProductCopy> productCopies;
 
     @ManyToOne
     private Client client;
 
-    @ManyToOne
-    private Department department;
+    @OneToMany
+    @JoinColumn(name="id_project")
+    List<Department> departments;
 
-    public Department getDepartment() {
-        return department;
-    }
 
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
 
     public Project() {
     }
 
-    public Project(Long id, String name, Date date, List<ProductCopy> productCopies, Client client, Department department) {
+    public List<Department> getDepartments() {
+        return departments;
+    }
+
+    public void setDepartments(List<Department> departments) {
+        this.departments = departments;
+    }
+
+    public Project(Long id, String name, Date date, List<ProductCopy> productCopies, Client client, List<Department> departments) {
         this.id = id;
         this.name = name;
         this.date = date;
         this.productCopies = productCopies;
         this.client = client;
-        this.department = department;
+        this.departments = departments;
     }
 
     public Client getClient() {

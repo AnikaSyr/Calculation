@@ -18,12 +18,17 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
+    public List<Product> listAll(){
+        return (List<Product>) productRepository.findAll();
+    }
     public List<Product> listAllOrderById(){
         return (List<Product>) productRepository.findAll((Sort.by(Sort.Direction.ASC, "id")));
     }
     public void save(Product product){
         productRepository.save(product);
     }
+
+
 
     public Product get(Long id) throws ProductNotFoundException {
         Optional<Product> result = productRepository.findById(id);
