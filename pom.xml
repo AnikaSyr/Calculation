@@ -11,10 +11,12 @@
     <groupId>com.example</groupId>
     <artifactId>budget</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>war</packaging>
     <name>budget</name>
     <description>budget</description>
     <properties>
         <java.version>11</java.version>
+        <jstl.version>1.2</jstl.version>
     </properties>
     <dependencies>
         <dependency>
@@ -58,6 +60,7 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
+            <version>${jstl.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>

@@ -5,10 +5,11 @@ import com.example.budget.model.User;
 import com.example.budget.repository.RoleRepository;
 import com.example.budget.repository.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.HashSet;
-
+@Service
 public class UserServiceImpl implements UserService{
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
