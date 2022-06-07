@@ -3,7 +3,7 @@ package com.example.budget.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "products_copy")
+
 public class ProductCopy {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

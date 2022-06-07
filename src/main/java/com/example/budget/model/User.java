@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name ="users")
+
 public class User {
 
     @Id
@@ -22,6 +22,12 @@ public class User {
 
     public int getEnabled() {
         return enabled;
+    }
+
+    public User() {
+        this.userName = userName;
+        this.password = password;
+        this.enabled = enabled;
     }
 
     public void setEnabled(int enabled) {

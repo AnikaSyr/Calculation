@@ -28,7 +28,7 @@
         <tr>
             <td>Client</td>
             <td> <form:select itemValue="id" itemLabel="name"
-                              path="client" items="${project.client}"/>
+                              path="client" items="${clients}"/>
 
             </td>
         </tr>
@@ -38,17 +38,23 @@
         </tr>
         <tr>
             <td>Department</td>
+
             <div class="checkbox-list">
-                <c:forEach var="i" varStatus="status" items="${project.departments}">
-                    <input type="checkbox" name="departments" value="${department.name}"> <c:out value="${department.name}" /><br>
+               <c:forEach var="department" items="${departments}">
+                   <td>   <input type="checkbox" value="${department.name}"> <c:out value="${department.name}"/><br/>
+                   </td>
+                   <c:forEach var="product" items="${department.products}">
+                       <td><input type="checkbox" name="${product.name}"><c:out value="${product.name}"/>
+                       </td>
+                   </c:forEach>
                 </c:forEach>
             </div>
 
-<%--            <td class="h6 m-3"><form:checkboxes itemValue="id" itemLabel="name" items = "${departments}" var = "department" path="department" delimiter="<br/>"--%>
+<%--            <td class="h6 m-3"><form:checkboxes path="departments" itemValue="id" itemLabel="name" items = "${departments}" var = "department"  delimiter="<br/>"--%>
 <%--            /></td>--%>
 
-        </tr>
-<%--        <tr>--%>
+<%--        </tr>--%>
+<%--&lt;%&ndash;        <tr>&ndash;%&gt;--%>
 <%--            <c:forEach items="${departments}" var="department" >--%>
 
 <%--                     <td>        <c:out  value="${department.id}" /> </> </td>--%>

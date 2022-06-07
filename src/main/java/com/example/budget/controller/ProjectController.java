@@ -39,13 +39,14 @@ public class ProjectController {
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String addProject (Model model){
         Collection<Client> clients = clientService.listAll();
-        Collection<Department> departments = departmentService.listAll();
+        List<Department> departments = departmentService.listAll();
         List<Product> products = productService.listAll();
 
         model.addAttribute("project", new Project());
         model.addAttribute("clients", clients);
         model.addAttribute("departments", departments);
         model.addAttribute("products", products);
+
         return "project";
     }
 }

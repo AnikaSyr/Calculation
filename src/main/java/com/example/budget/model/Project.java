@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name="projects")
+
 public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,18 +16,28 @@ public class Project {
 
     private Date date;
 
-    @OneToMany
-    @JoinColumn(name="id_project")
-    List<ProductCopy> productCopies;
+    @ManyToMany
+    @JoinTable(name = "project_products",
+    joinColumns = @JoinColumn(name = "project_id"),
+    inverseJoinColumns = @JoinColumn(name="product_id"))
+    List<Product> products;
 
     @ManyToOne
     private Client client;
 
-    @OneToMany
-    @JoinColumn(name="id_project")
+    @ManyToMany
+    @JoinTable(name = "project_departments",
+            joinColumns = @JoinColumn(name = "project_id"),
+            inverseJoinColumns = @JoinColumn(name="department_id"))
     List<Department> departments;
 
+    public List<Product> getProducts() {
+        return products;
+    }
 
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
 
     public Project() {
     }
@@ -40,14 +50,7 @@ public class Project {
         this.departments = departments;
     }
 
-    public Project(Long id, String name, Date date, List<ProductCopy> productCopies, Client client, List<Department> departments) {
-        this.id = id;
-        this.name = name;
-        this.date = date;
-        this.productCopies = productCopies;
-        this.client = client;
-        this.departments = departments;
-    }
+
 
     public Client getClient() {
         return client;
@@ -81,11 +84,5 @@ public class Project {
         this.date = date;
     }
 
-    public List<ProductCopy> getProductCopies() {
-        return productCopies;
-    }
 
-    public void setProductCopies(List<ProductCopy> productCopies) {
-        this.productCopies = productCopies;
-    }
 }
