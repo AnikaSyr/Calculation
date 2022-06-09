@@ -1,9 +1,6 @@
 package com.example.budget.controller;
 
-import com.example.budget.model.Client;
-import com.example.budget.model.Department;
-import com.example.budget.model.Product;
-import com.example.budget.model.Project;
+import com.example.budget.model.*;
 import com.example.budget.service.ClientService;
 import com.example.budget.service.DepartmentService;
 import com.example.budget.service.ProductService;
@@ -12,9 +9,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.util.Collection;
 import java.util.List;
 
@@ -46,7 +47,19 @@ public class ProjectController {
         model.addAttribute("clients", clients);
         model.addAttribute("departments", departments);
         model.addAttribute("products", products);
+        model.addAttribute("productCopy", new ProductCopy());
 
         return "project";
     }
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public String handle (@Valid Project project, BindingResult bindingResult, RedirectAttributes ra){
+        if(bindingResult.hasErrors()){
+            logger.error("incorrect data");
+            return "project";
+        }
+        projectService.save(project);
+        ra.addFlashAttribute("message", "The project has been saved successfully");
+
+        return "redirect:/project/find";
+}
 }

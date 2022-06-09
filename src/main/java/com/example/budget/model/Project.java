@@ -1,6 +1,9 @@
 package com.example.budget.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -14,7 +17,7 @@ public class Project {
 
     private String name;
 
-    private Date date;
+    private LocalDate date;
 
     @ManyToMany
     @JoinTable(name = "project_products",
@@ -24,6 +27,18 @@ public class Project {
 
     @ManyToOne
     private Client client;
+
+    @OneToMany
+    @JoinColumn(name="id_project")
+    private List<ProductCopy> productsCopies;
+
+    public List<ProductCopy> getProductsCopies() {
+        return productsCopies;
+    }
+
+    public void setProductsCopies(List<ProductCopy> productsCopies) {
+        this.productsCopies = productsCopies;
+    }
 
     @ManyToMany
     @JoinTable(name = "project_departments",
@@ -76,13 +91,21 @@ public class Project {
         this.name = name;
     }
 
-    public Date getDate() {
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
-
+    public Project(String name, LocalDate date, List<Product> products, Client client, List<ProductCopy> productsCopies, List<Department> departments) {
+        this.name = name;
+        this.date = date;
+        this.products = products;
+        this.client = client;
+        this.productsCopies = productsCopies;
+        this.departments = departments;
+    }
 }

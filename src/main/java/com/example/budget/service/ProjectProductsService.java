@@ -1,5 +1,6 @@
 package com.example.budget.service;
 
+import com.example.budget.model.Project;
 import com.example.budget.model.ProjectsProducts;
 import com.example.budget.repository.ProjectProductsRepository;
 import org.springframework.stereotype.Service;
@@ -14,5 +15,7 @@ public class ProjectProductsService {
         this.projectProductsRepository = projectProductsRepository;
     }
 
-//    public List<ProjectsProducts>
+    public List<ProjectsProducts> listProductsByProject (Project project) {
+        return projectProductsRepository.findByProject(project);
+    }
 }

@@ -1,9 +1,9 @@
 package com.example.budget.controller;
 
-import com.example.budget.exception.ClientNotFoundException;
 import com.example.budget.exception.ProductNotFoundException;
 import com.example.budget.model.Product;
 import com.example.budget.model.Unit;
+import com.example.budget.service.DepartmentService;
 import com.example.budget.service.ProductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,13 +24,14 @@ import java.util.List;
 @RequestMapping("product")
 public class ProductController {
     private final ProductService productService;
-
+    private final DepartmentService departmentService;
 
     private final Logger logger = LoggerFactory.getLogger(ProductController.class);
 
-    public ProductController(ProductService productService) {
+    public ProductController(ProductService productService, DepartmentService departmentService) {
         this.productService = productService;
 
+        this.departmentService = departmentService;
     }
 
 
@@ -43,12 +44,13 @@ public class ProductController {
         return "product";
     }
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String handle (@Valid Product product, BindingResult bindingResult){
+    public String handle (@Valid Product product, BindingResult bindingResult, RedirectAttributes ra){
         if(bindingResult.hasErrors()){
             logger.error("incorrect data");
             return "product";
         }
         productService.save(product);
+        ra.addFlashAttribute("message", "The product has been saved successfully");
 
         return "redirect:/product/find";
     }

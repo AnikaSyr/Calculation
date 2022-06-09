@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
     public Long countById(Long id);
+    List<Product> findByDepartment(Long departmentId);
 }

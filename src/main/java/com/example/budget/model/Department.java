@@ -1,11 +1,10 @@
 package com.example.budget.model;
 
-import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+
 import java.util.List;
-import java.util.Set;
+
 
 @Entity
 public class Department {

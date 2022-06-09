@@ -14,6 +14,23 @@
         }
 
     </style>
+    <script type='text/javascript'>
+        function eventClick(box) {
+            let products=document.getElementsByName("c1");
+            var vis = "none";
+            for(var i=0;i<products.length;i++) {
+                if(products[i].checked){
+                    vis = "block";
+                    break;
+                }
+            }
+            document.getElementById(box).style.display = vis;
+
+
+
+        }
+    </script>
+
 </head>
 <body class = "container-fluid">
 
@@ -37,38 +54,53 @@
             <td><form:input name="date" type = "date" path="date"/></td>
         </tr>
         <tr>
+
             <td>Department</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
 
+        </tr>
+        <tr id="chk">
             <div class="checkbox-list">
-               <c:forEach var="department" items="${departments}">
-                   <td>   <input type="checkbox" value="${department.name}"> <c:out value="${department.name}"/><br/>
-                   </td>
-                   <c:forEach var="product" items="${department.products}">
-                       <td><input type="checkbox" name="${product.name}"><c:out value="${product.name}"/>
-                       </td>
+
+
+               <c:forEach var="department" items="${departments}" varStatus="loop">
+
+                   <td><b><form:checkbox path="departments" value="${department.name}" /><c:out value="${department.name}"/></b>  </td
+
+
+                   <td></td>
+                   <td></td>
+                   <td></td>
+                   <td></td>
+                   <td></td>
+    </tr>
+        </div>
+
+                   <c:forEach var="product" items="${department.products}" varStatus="loop">
+
+
+                        <td>  <form:checkbox path="productsCopies" value="${product.name}" />
+                            <c:out value="${product.name}"/></td>
+                       <td>    <c:out value="${product.price}"/><br/></td>
+                       <td>     <c:out value="${product.unit}"/><br/></td>
+                       <td>Quantity: </td>
+                     <td><form:input path="productsCopies" /> </td>
+
+
+
+                       </tr>
                    </c:forEach>
+
+
+
                 </c:forEach>
-            </div>
-
-<%--            <td class="h6 m-3"><form:checkboxes path="departments" itemValue="id" itemLabel="name" items = "${departments}" var = "department"  delimiter="<br/>"--%>
-<%--            /></td>--%>
-
-<%--        </tr>--%>
-<%--&lt;%&ndash;        <tr>&ndash;%&gt;--%>
-<%--            <c:forEach items="${departments}" var="department" >--%>
-
-<%--                     <td>        <c:out  value="${department.id}" /> </> </td>--%>
-<%--                    <c:forEach items="${department.products}" var="product">--%>
-<%--                     <td>          <c:out  value="${product}"/> </td>--%>
-<%--                    </c:forEach>--%>
-
-<%--                 <--%>
 
 
-<%--            </c:forEach>--%>
-
-<%--        </tr>--%>
     </table>
+
     <div class="card-footer d-grid gap-2 d-md-flex justify-content-md-end">
         <button type="submit" class="btn btn-outline-dark">Add</button>
         <button type="reset" class="btn btn-outline-dark">Cancel</button>
@@ -85,4 +117,8 @@
 
 
 </body>
+
 </html>
+
+
+

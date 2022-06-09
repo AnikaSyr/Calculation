@@ -1,6 +1,7 @@
 package com.example.budget.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 
@@ -19,6 +20,9 @@ public class Product {
 
     @ManyToOne
     private Department department;
+
+    @ManyToMany
+    private List<Project> projects;
 
     public Product(Long id, String name, Unit unit, Double price, Department department) {
         this.id = id;

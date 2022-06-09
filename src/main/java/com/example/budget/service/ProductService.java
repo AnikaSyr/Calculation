@@ -21,6 +21,10 @@ public class ProductService {
     public List<Product> listAll(){
         return (List<Product>) productRepository.findAll();
     }
+
+    public List<Product> listByDepName(Long departmentId){
+        return (List<Product>) productRepository.findByDepartment(departmentId);
+    }
     public List<Product> listAllOrderById(){
         return (List<Product>) productRepository.findAll((Sort.by(Sort.Direction.ASC, "id")));
     }

@@ -37,12 +37,13 @@ public class DepartmentController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String handle(@Valid Department department, BindingResult bindingResult) {
+    public String handle(@Valid Department department, BindingResult bindingResult, RedirectAttributes ra) {
         if (bindingResult.hasErrors()) {
             logger.error("incorrect data");
             return "department";
         }
         departmentService.save(department);
+        ra.addFlashAttribute("message", "The department has been saved successfully");
 
         return "redirect:/department/find";
     }

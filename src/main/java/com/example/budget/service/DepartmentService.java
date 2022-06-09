@@ -30,6 +30,10 @@ public class DepartmentService {
         departmentRepository.save(department);
     }
 
+    public Department getDepartmentByName (String name){
+        return departmentRepository.findByName(name);
+    }
+
     public Department get(Long id) throws DepartmentNotFoundException {
         Optional<Department> result = departmentRepository.findById(id);
         if (result.isPresent()){
