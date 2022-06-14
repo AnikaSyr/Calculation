@@ -4,6 +4,7 @@ import com.example.budget.exception.ProductCopyNotFoundException;
 import com.example.budget.exception.ProductNotFoundException;
 import com.example.budget.model.Product;
 import com.example.budget.model.ProductCopy;
+import com.example.budget.model.Project;
 import com.example.budget.repository.ProductCopyRepository;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,9 @@ public class ProductCopyService {
         this.productCopyRepository = productCopyRepository;
     }
 
-
+public void deleteProductsCopiesByProjectId (Long id){
+        productCopyRepository.deleteProductCopiesByProjectId(id);
+}
     public List<ProductCopy> listAll(){
         return (List<ProductCopy>) productCopyRepository.findAll();
     }

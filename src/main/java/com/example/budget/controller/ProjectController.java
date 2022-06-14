@@ -76,18 +76,27 @@ public class ProjectController {
 
         return "redirect:/project/find/" + id;
 }
-    @RequestMapping(value = "/change", method = RequestMethod.POST)
-    public String change (@Valid Project project, BindingResult bindingResult, RedirectAttributes ra){
-        if(bindingResult.hasErrors()){
-            logger.error("incorrect data");
-            return "project_edit";
-        }
-          projectService.save(project);
-
-        ra.addFlashAttribute("message", "The project has been saved successfully");
-
-        return "redirect:/project/find/";
-    }
+//    @RequestMapping(value = "/change", method = RequestMethod.POST)
+//    public String change (@Valid Project project, @RequestParam List<Long> id, @RequestParam List<Integer> params, BindingResult bindingResult, RedirectAttributes ra){
+//        if(bindingResult.hasErrors()){
+//            logger.error("incorrect data");
+//            return "project_edit";
+//        }
+//
+//
+//        List<ProductCopy> products = project.getProductsCopies();
+//        projectService.save(project);
+//        for (int i = 0; i < products.size(); i++) {
+//            ProductCopy productCopy = products.get(i);
+//            productCopy.setId(id.get(i));
+//            productCopy.setProject(project);
+//            productCopy.setAmount(params.get(i));
+//        productCopyService.save(productCopy);}
+//
+//        ra.addFlashAttribute("message", "The project has been saved successfully");
+//
+//        return "redirect:/project/find/";
+//    }
 @GetMapping("find/{id}")
 public String ShowOne(@PathVariable("id") Long id, Model model, RedirectAttributes ra){
 

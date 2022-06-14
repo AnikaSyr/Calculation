@@ -56,7 +56,7 @@
             <div class="checkbox-list">
 
 
-                <c:forEach var="department" items="${departments}" varStatus="loop">
+                <c:forEach var="department" items="${project.departments}" varStatus="loop">
 
                 <td><b><form:checkbox path="departments" value="${department.id}" label="${department.name}" />
                 </td>
@@ -68,6 +68,27 @@
 
 
         </tr>
+<%--        <c:forEach var="product" items="${department.productsCopies}" varStatus="loop">--%>
+
+
+
+<%--            <c:if test="${project.id == product.project.id}">--%>
+
+<%--            <td>  <form:checkbox path="productsCopies" value="${product.id}"  />--%>
+<%--                <input value="${product.id}" type="hidden", name="id"/>--%>
+<%--                <c:out value="${product.name}"/></td>--%>
+<%--            <td>   <fmt:formatNumber type="number" pattern="0.00 PLN"  value="${product.price}"/>--%>
+<%--                <c:out value=" / ${product.unit}"/></td>--%>
+<%--            <td>Quantity: </td>--%>
+<%--                <td><input type="number" name="params"  /> </td>--%>
+
+<%--            <td></td>--%>
+
+
+
+<%--            </tr>--%>
+<%--            </c:if>--%>
+<%--        </c:forEach>--%>
         </div>
         <c:forEach var="product" items="${department.products}" varStatus="loop">
 

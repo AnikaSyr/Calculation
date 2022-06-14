@@ -21,13 +21,9 @@
     <h2 class = "bg-gradient text-dark card-header text-xl-center">Register</h2>
     <table class="table table-hover">
         <tr>
-            <td>Name</td>
+            <td>Username</td>
             <td> <form:input  required="required" type="text" path="userName" /></td>
         </tr>
-<%--        <tr>--%>
-<%--            <td>Enabled</td>--%>
-<%--            <td> <form:input type="number"  required="required" path="enabled" /></td>--%>
-<%--        </tr>--%>
         <tr>
             <td>Password</td>
             <td> <form:input  required="required" type="password" path="password" /></td>

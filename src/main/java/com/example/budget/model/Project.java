@@ -108,4 +108,6 @@ public class Project {
         this.productsCopies = productsCopies;
         this.departments = departments;
     }
+
+
 }
