@@ -1,10 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@include file="fragments/header.jsp"%>
 <html>
 <head>
-    <title>Clients</title>
+    <title>Products</title>
     <style>
         #products{
             width: 1000px;
@@ -28,7 +29,7 @@
             <th>Name</th>
             <th>Price</th>
             <th>Unit</th>
-            <th>Department ID</th>
+            <th>Department Name</th>
         </tr>
         </thead>
         <c:forEach items="${products}" var="product">
@@ -36,9 +37,9 @@
         <tr>
             <td><c:out value = "${product.id}"/></td>
             <td><c:out value = "${product.name}"/></td>
-            <td><c:out value = "${product.price}"/></td>
+            <td><fmt:formatNumber type="number" pattern="0.00 PLN"  value = "${product.price}"/></td>
             <td><c:out value = "${product.unit}"/></td>
-            <td><c:out value = "${product.department.id}"/></td>
+            <td><c:out value = "${product.department.name}"/></td>
             <td>
                 <a class = "h6 m-2" href="/product/edit/${product.id}">Edit</a>
                 <a class="h6" href="/product/delete/${product.id}">Delete</a>

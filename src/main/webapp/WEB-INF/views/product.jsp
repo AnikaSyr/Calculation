@@ -22,11 +22,11 @@
     <table class="table table-hover">
         <tr>
             <td>Name</td>
-            <td> <form:input path="name" /></td>
+            <td> <form:input  required="required" path="name" /></td>
         </tr>
         <tr>
             <td>Price</td>
-            <td> <form:input type="number" placeholder="1,00" step="0.01" min="0" path="price" /></td>
+            <td> <form:input required="required" type="number" placeholder="1,00" step="0.01" min="0" path="price" /></td>
         </tr>
         <tr>
             <td>Unit</td>
@@ -37,8 +37,13 @@
             </td>
         </tr>
         <tr>
-            <td>Department ID</td>
-            <td> <form:input type="number" placeholder="1"  min="1" path="department" /></td>
+            <td>Department Name</td>
+            <td>   <form:select path="department">
+                <form:option value="-" label="--Please Select--"/>
+                <form:options itemValue="id" itemLabel="name" items="${departments}"/>
+                </form:select>
+            </td>
+
         </tr>
     </table>
     <div class="card-footer d-grid gap-2 d-md-flex justify-content-md-end">

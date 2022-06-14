@@ -1,6 +1,7 @@
 package com.example.budget.controller;
 
 import com.example.budget.exception.ProductNotFoundException;
+import com.example.budget.model.Department;
 import com.example.budget.model.Product;
 import com.example.budget.model.Unit;
 import com.example.budget.service.DepartmentService;
@@ -38,9 +39,11 @@ public class ProductController {
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String addProduct (Model model){
         List<Unit> units = Arrays.asList(Unit.values());
+        List<Department> departments = departmentService.listAll();
 
         model.addAttribute("product", new Product());
         model.addAttribute("units", units);
+        model.addAttribute("departments", departments);
         return "product";
     }
     @RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -64,9 +67,11 @@ public class ProductController {
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable("id") Long id, Model model) {
 
+        List<Department> departments = departmentService.listAll();
         try {
             Product product = productService.get(id);
             model.addAttribute("product", product);
+            model.addAttribute("departments", departments);
             return "product_edit";
         } catch (ProductNotFoundException e) {
             return "redirect:/product/find";

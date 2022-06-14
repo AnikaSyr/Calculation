@@ -22,7 +22,7 @@
 <table class="table table-hover">
     <tr>
         <td>Name</td>
-        <td> <form:input type="text" path="name" /></td>
+        <td> <form:input  required="required" type="text" path="name" /></td>
     </tr>
 </table>
     <div class="card-footer d-grid gap-2 d-md-flex justify-content-md-end">

@@ -2,6 +2,7 @@
            uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="fragments/header.jsp"%>
 <html>
 <head>
@@ -40,7 +41,7 @@
     <table class="table table-hover">
         <tr>
             <td>Project's Name</td>
-            <td> <form:input path="name" /></td>
+            <td> <form:input required="required" path="name" /></td>
         </tr>
         <tr>
             <td>Client</td>
@@ -51,7 +52,7 @@
         </tr>
         <tr>
             <td>Date of offer</td>
-            <td><form:input name="date" type = "date" path="date"/></td>
+            <td><form:input required="required"  name="date" type = "date" path="date"/></td>
         </tr>
         <tr>
 
@@ -59,7 +60,7 @@
             <td></td>
             <td></td>
             <td></td>
-            <td></td>
+
 
         </tr>
         <tr id="chk">
@@ -68,26 +69,27 @@
 
                <c:forEach var="department" items="${departments}" varStatus="loop">
 
-                   <td><b><form:checkbox path="departments" value="${department.name}" /><c:out value="${department.name}"/></b>  </td
+                   <td><b><form:checkbox path="departments" value="${department.id}" label="${department.name}" />
+                        </td>
 
+                   <td></td>
+                   <td></td>
+                   <td></td>
+                   <td></td>
 
-                   <td></td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
     </tr>
         </div>
-
                    <c:forEach var="product" items="${department.products}" varStatus="loop">
 
 
-                        <td>  <form:checkbox path="productsCopies" value="${product.name}" />
-                            <c:out value="${product.name}"/></td>
-                       <td>    <c:out value="${product.price}"/><br/></td>
-                       <td>     <c:out value="${product.unit}"/><br/></td>
+                        <td>  <form:checkbox path="products" value="${product.id}"  />
+                               <c:out value="${product.name}"/></td>
+                       <td>   <fmt:formatNumber type="number" pattern="0.00 PLN"  value="${product.price}"/>
+                           <c:out value=" / ${product.unit}"/></td>
                        <td>Quantity: </td>
-                     <td><form:input path="productsCopies" /> </td>
+                     <td><input type="number" name="params"  /> </td>
+
+                       <td></td>
 
 
 

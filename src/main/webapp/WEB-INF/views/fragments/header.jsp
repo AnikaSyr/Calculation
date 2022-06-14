@@ -39,12 +39,12 @@
                     <a class="dropdown-item" href="/product/find">Manage</a>
                 </div>
             </li>
-            </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="userList" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">User</a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="/user/register">Register</a>
-<%--                    <a class="dropdown-item" href="/user/">Manage</a>--%>
+                    <a class="dropdown-item" href="/login">Log in</a>
+                    <a class="dropdown-item" href="/logout">Log out</a>
                 </div>
             </li>
 

@@ -1,5 +1,6 @@
 <%@ taglib prefix="form"
            uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="fragments/header.jsp"%>
 <html>
@@ -39,8 +40,11 @@
             </td>
         </tr>
         <tr>
-            <td>Department ID</td>
-            <td> <form:input type="number" placeholder="1"  min="1" path="department" /></td>
+            <td>Department Name</td>
+            <td> <form:select path="department">
+
+                <form:options itemValue="id" itemLabel="name" items="${departments}"/>
+            </form:select></td>
         </tr>
     </table>
     <div class="card-footer d-grid gap-2 d-md-flex justify-content-md-end">

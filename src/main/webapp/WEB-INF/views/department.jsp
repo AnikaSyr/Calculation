@@ -4,7 +4,7 @@
 <%@include file="fragments/header.jsp"%>
 <html>
 <head>
-  <title>Client</title>
+  <title>Department</title>
   <style>
     #dpt{
       width: 500px;
@@ -22,7 +22,7 @@
   <table class="table table-hover">
     <tr>
       <td>Name</td>
-      <td> <form:input path="name" /></td>
+      <td> <form:input  required="required" path="name" /></td>
     </tr>
   </table>
   <div class="card-footer d-grid gap-2 d-md-flex justify-content-md-end">

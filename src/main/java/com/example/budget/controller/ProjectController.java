@@ -1,18 +1,14 @@
 package com.example.budget.controller;
 
+import com.example.budget.exception.ProjectNotFoundException;
 import com.example.budget.model.*;
-import com.example.budget.service.ClientService;
-import com.example.budget.service.DepartmentService;
-import com.example.budget.service.ProductService;
-import com.example.budget.service.ProjectService;
+import com.example.budget.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -27,13 +23,15 @@ public class ProjectController {
     private final ClientService clientService;
     private final ProductService productService;
     private final DepartmentService departmentService;
+    private final ProductCopyService productCopyService;
     private final Logger logger = LoggerFactory.getLogger(ProductController.class);
 
-    public ProjectController(ProjectService projectService, ClientService clientService, ProductService productService, DepartmentService departmentService) {
+    public ProjectController(ProjectService projectService, ClientService clientService, ProductService productService, DepartmentService departmentService, ProductCopyService productCopyService) {
         this.projectService = projectService;
         this.clientService = clientService;
         this.productService = productService;
         this.departmentService = departmentService;
+        this.productCopyService = productCopyService;
     }
 
 
@@ -52,14 +50,92 @@ public class ProjectController {
         return "project";
     }
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String handle (@Valid Project project, BindingResult bindingResult, RedirectAttributes ra){
+    public String handle (@Valid Project project,@RequestParam List<Integer> params, BindingResult bindingResult, RedirectAttributes ra){
         if(bindingResult.hasErrors()){
             logger.error("incorrect data");
             return "project";
         }
+        List<Product> products = project.getProducts();
+
+
         projectService.save(project);
+        Long id = project.getId();
+        for (int i = 0; i < products.size(); i++) {
+            Product product = products.get(i);
+            ProductCopy productCopy = new ProductCopy();
+            productCopy.setName(product.getName());
+            productCopy.setProject(project);
+            productCopy.setDepartment(product.getDepartment());
+            productCopy.setPrice(product.getPrice());
+            productCopy.setUnit(product.getUnit());
+            productCopy.setAmount(params.get(i));
+
+            productCopyService.save(productCopy);
+        }
         ra.addFlashAttribute("message", "The project has been saved successfully");
 
-        return "redirect:/project/find";
+        return "redirect:/project/find/" + id;
 }
+    @RequestMapping(value = "/change", method = RequestMethod.POST)
+    public String change (@Valid Project project, BindingResult bindingResult, RedirectAttributes ra){
+        if(bindingResult.hasErrors()){
+            logger.error("incorrect data");
+            return "project_edit";
+        }
+          projectService.save(project);
+
+        ra.addFlashAttribute("message", "The project has been saved successfully");
+
+        return "redirect:/project/find/";
+    }
+@GetMapping("find/{id}")
+public String ShowOne(@PathVariable("id") Long id, Model model, RedirectAttributes ra){
+
+    try {
+        Project project = projectService.get(id);
+        model.addAttribute("project", project);
+        return "project_one";
+    } catch (ProjectNotFoundException e) {
+        ra.addFlashAttribute("message", e.getMessage());
+        return "redirect:/project/find";
+    }
+
+}
+
+    @GetMapping(value = "/find")
+    public String getAll(Model model){
+        List<Project> projects = projectService.listAllOrderById();
+        model.addAttribute("projects", projects);
+        return "projects";}
+
+    @GetMapping("/edit/{id}")
+    public String showEditForm(@PathVariable("id") Long id, Model model, RedirectAttributes ra) {
+
+        Collection<Client>clients = clientService.listAll();
+        List<Department> departments = departmentService.listAll();
+        try {
+            Project project = projectService.get(id);
+            model.addAttribute("project", project);
+            model.addAttribute("clients", clients);
+            model.addAttribute("departments", departments);
+            return "project_edit";
+        } catch (ProjectNotFoundException e) {
+            ra.addFlashAttribute("message", e.getMessage());
+            return "redirect:/project/find";
+        }
+
+    }
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable("id") Long id, RedirectAttributes ra) {
+
+        try {
+            projectService.delete(id);
+
+        } catch (ProjectNotFoundException e) {
+            ra.addFlashAttribute("message", e.getMessage());
+
+        }
+        return "redirect:/project/find";
+
+    }
 }

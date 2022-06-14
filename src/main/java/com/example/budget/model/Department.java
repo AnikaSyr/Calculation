@@ -18,6 +18,20 @@ public class Department {
     @OneToMany(mappedBy = "department")
     private List<Product> products;
 
+    @OneToMany(mappedBy = "department")
+    private List<ProductCopy> productsCopies;
+
+    @ManyToMany
+    private List<Project> projects;
+
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
+    }
+
     public Department(String name, List<Product> products) {
         this.name = name;
         this.products = products;
@@ -25,6 +39,14 @@ public class Department {
 
     public Department() {
 
+    }
+
+    public List<ProductCopy> getProductsCopies() {
+        return productsCopies;
+    }
+
+    public void setProductsCopies(List<ProductCopy> productsCopies) {
+        this.productsCopies = productsCopies;
     }
 
     public Long getId() {

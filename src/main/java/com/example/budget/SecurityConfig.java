@@ -19,9 +19,17 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((authz) -> authz
-                        .anyRequest().authenticated()
+                        .antMatchers("/client/**", "/project/**", "/department/**", "/product/**").authenticated()
+                        .and()
+
+
                 )
-                .httpBasic(withDefaults());
+                .formLogin()
+                .usernameParameter("userName")
+                .defaultSuccessUrl("/")
+                .permitAll()
+                .and()
+                .logout().logoutSuccessUrl("/").permitAll();
         return http.build();
     }
     @Bean
@@ -34,3 +42,5 @@ public class SecurityConfig {
         return new SpringDataUserDetailsService();
     }
 }
+
+

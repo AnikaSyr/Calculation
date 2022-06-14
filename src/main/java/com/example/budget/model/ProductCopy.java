@@ -20,6 +20,17 @@ public class ProductCopy {
     @ManyToOne
     private Department department;
 
+    @ManyToOne
+    private Project project;
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
     public Department getDepartment() {
         return department;
     }
@@ -31,11 +42,13 @@ public class ProductCopy {
     public ProductCopy() {
     }
 
-    public ProductCopy(String name, Unit unit, Double price, Integer amount) {
+    public ProductCopy(String name, Unit unit, Double price, Integer amount, Department department, Project project) {
         this.name = name;
         this.unit = unit;
         this.price = price;
         this.amount = amount;
+        this.department = department;
+        this.project = project;
     }
 
     public Long getId() {

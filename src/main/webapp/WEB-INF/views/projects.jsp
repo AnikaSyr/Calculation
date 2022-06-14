@@ -4,10 +4,10 @@
 <%@include file="fragments/header.jsp"%>
 <html>
 <head>
-    <title>Clients</title>
+    <title>Projects</title>
     <style>
         #projects{
-            width: 500px;
+            width: 1000px;
             margin: auto;
             margin-top: 100px;
         }
@@ -26,6 +26,7 @@
         <tr>
             <th>ID</th>
             <th>Name</th>
+            <th>Client</th>
             <th>Date</th>
             <th>Departments</th>
             <th>Products</th>
@@ -36,9 +37,27 @@
         <tr>
             <td><c:out value = "${project.id}"/></td>
             <td><c:out value = "${project.name}"/></td>
+            <td><c:out value = "${project.client.name}"/></td>
             <td><c:out value = "${project.date}"/></td>
-            <td><c:out value = "${project.departments}"/></td>
-            <td><c:out value = "${project.productsCopies}"/></td>
+           <td> <c:forEach items="${project.departments}" var="department" varStatus="loop" >
+               <c:out value="${loop.index + 1}"/>
+               <c:out value="${department.name}" />
+               <br/>
+
+            </c:forEach></td>
+            <td> <c:forEach items="${project.productsCopies}" var="product" varStatus="loop">
+                <c:out value="${loop.index + 1}"/>
+                <c:out value="${product.name}"/>
+                -
+                <c:out value="${product.price}"/>
+                /
+                <c:out value="${product.amount}"/>
+                /
+                <c:out value="${product.unit}"/>
+
+                <br/>
+            </c:forEach></td>
+
             <td>
                 <a class = "h6 m-2" href="/project/edit/${project.id}">Edit</a>
                 <a class="h6" href="/project/delete/${project.id}">Delete</a>

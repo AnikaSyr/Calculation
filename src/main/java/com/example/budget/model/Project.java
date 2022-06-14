@@ -27,9 +27,12 @@ public class Project {
 
     @ManyToOne
     private Client client;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    public LocalDate getDate() {
+        return date;
+    }
 
-    @OneToMany
-    @JoinColumn(name="id_project")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
     private List<ProductCopy> productsCopies;
 
     public List<ProductCopy> getProductsCopies() {
@@ -91,10 +94,7 @@ public class Project {
         this.name = name;
     }
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    public LocalDate getDate() {
-        return date;
-    }
+
 
     public void setDate(LocalDate date) {
         this.date = date;

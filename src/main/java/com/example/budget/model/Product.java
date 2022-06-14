@@ -32,6 +32,14 @@ public class Product {
         this.department = department;
     }
 
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
+    }
+
     public Department getDepartment() {
         return department;
     }

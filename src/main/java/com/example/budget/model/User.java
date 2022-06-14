@@ -24,12 +24,13 @@ public class User {
         return enabled;
     }
 
-    public User() {
+    public User(String userName, String password) {
         this.userName = userName;
         this.password = password;
-        this.enabled = enabled;
     }
 
+    public User() {
+    }
     public void setEnabled(int enabled) {
         this.enabled = enabled;
     }
