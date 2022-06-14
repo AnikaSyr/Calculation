@@ -78,7 +78,9 @@
     <td>Quantity: <c:out value="${product.amount}"  /> </td>
     <td>Sum = <fmt:formatNumber type="number" pattern="0.00 PLN" value="${product.price * product.amount}"/></td>
     <td></td>
-
+        <tr>
+            </td>
+        </tr>
     </c:if>
 
     </tr>
@@ -88,8 +90,14 @@
             </c:forEach>
 
             </c:forEach>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
 
-</table>
+            <td><b>Total sum: <fmt:formatNumber type="number" pattern="0.00 PLN" value="${project.productsCopies.stream().map(product->product.price * product.amount).sum()}"/></b>
+
+        </table>
     <div class="card-footer d-grid gap-2 d-md-flex justify-content-md-end">
         <button  class="btn btn-outline-dark" onclick="location.href='/project/edit/${project.id}';">Edit</button>
         <button  class="btn btn-outline-dark" onclick="location.href='/project/delete/${project.id}';">Delete</button>
